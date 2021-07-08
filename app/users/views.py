@@ -4,7 +4,7 @@ from django.urls import reverse
 
 import requests
 
-ENDPOINT_URL = 'https://4d3660eacf86.ngrok.io/api/users/'
+ENDPOINT_URL = 'https://b5684f2f9a15.ngrok.io/api/users/'
 
 def profile(request):
     message=""
@@ -46,6 +46,12 @@ def signup(request):
             print(r.status_code)
             if r.status_code >= 200 and r.status_code < 300:
                 request.session['auth_payload'] = {'Authorization': 'token ' + r.json()['token']}
+                payload={
+                    'user':1    
+                }
+                r = requests.post(ENDPOINT_URL[:-6] + 'games/score_create/',data=payload,headers=request.session['auth_payload'])
+                print(r.json())
+                print(r.status_code)
             return HttpResponseRedirect(reverse('main:dashboard'))
         message = "Email Already Exists Or Bad Credentials! Try Again."
     return render(request, "users/sign-up.html",{'message':message})
@@ -69,4 +75,3 @@ def signout(request):
     except KeyError:
         pass
     return HttpResponseRedirect(reverse('users:signin'))
-

@@ -1,0 +1,18 @@
+Overall Health Analytical Report
+
+User Details = {'email': 'gaurav@gmail.com', 'name': 'Gaurav Soni'}
+
+Game Analytics Report = [{'id': 1, 'tower_blocks_score': 8, 'bounce_score': 44, 'kill_birds_score': 5, 'snake_score': 11, 'inventory_score': 24, 'last_updated': '2021-07-04T18:07:07.810953+05:30', 'user': 2}]
+
+Neuropsychiatric Report :
+Perception = 53% 
+Attention = 67%
+Learning = 67%
+
+Depression Detection Inventory Report = Moderate Depression
+
+Heartrate (BPM) = 78
+
+Step Count = 64
+
+Energy Consumed(Calories) = 2.56

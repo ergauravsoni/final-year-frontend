@@ -1,5 +1,5 @@
 /* Customisable map data */
-
+var interval;
 var map = {
 
     tile_size: 16,
@@ -136,8 +136,8 @@ var map = {
         /* you can just use "this" instead of your engine variable ("game"), but Codepen doesn't like it */
         change_colour: 'game.player.colour = "#"+(Math.random()*0xFFFFFF<<0).toString(16);',
         /* you could load a new map variable here */
-        next_level: 'alert("Yay! You won! Reloading map.");game.load_map(map);',
-        death: 'alert("You died!");game.load_map(map);',
+        next_level: 'alert("Yay! You won! Saving Score.");var payload = {"score":document.querySelector("#timer").innerHTML,"email":1};$.post("/bounce/",payload);location.href = "/dashboard/";',
+        death: 'clearInterval(interval);alert("You died! Saving Score.");var payload = {"score":0,"email":1};$.post("/bounce/",payload);location.href = "/dashboard/";',
         unlock: 'game.current_map.keys[10].solid = 0;game.current_map.keys[10].colour = "#888";'
     }
 };
@@ -626,3 +626,11 @@ var Loop = function() {
 };
 
 Loop();
+
+var time=0;
+var timer = document.querySelector("#timer");
+function showTime() {
+    time += 1;
+    timer.innerHTML = (time);
+}
+interval = setInterval(showTime, 1000);

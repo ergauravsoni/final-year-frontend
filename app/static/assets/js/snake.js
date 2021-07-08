@@ -153,6 +153,13 @@
      
      // Check Collision
      if (this.collision(nx, ny) == true) {
+       var payload = {
+           'score':snake.stage.score,
+           'email':1
+       }; 
+       $.post("/snake/",payload);
+       location.href = "/dashboard/";
+       alert("Game Over!");
        snake.restart();
        return;
      }
@@ -212,6 +219,7 @@
    var gameDraw = new Game.Draw(context, snake);
    
    // Game Interval
+   console.log(snake.stage.conf.fps)
    setInterval(function() {gameDraw.drawStage();}, snake.stage.conf.fps);
  };
  
@@ -220,5 +228,5 @@
   * Window Load
   */
  window.onload = function() {
-   var snake = new Game.Snake('stage', {fps: 100, size: 4});
+   var snake = new Game.Snake('stage', {fps: 35, size: 4});
  };

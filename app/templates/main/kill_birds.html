@@ -15,7 +15,7 @@
             <div class="timer">
                  <span></span>    
             </div>
-            <div class="gameover">GAME OVER<a href="/dashboard/"><button class="btn">Go Back</button></a></div>
+            <div class="gameover">GAME OVER<a><button class="btn" onclick=saveAndQuit()>Go Back</button></a></div>
             <h1>KILL THE BIRDS <span>(shoot the birds)</span></h1>
             <input class="input-circle input-circle1" type="radio" id="circle1" >
             <input class="input-circle input-circle2" type="radio" id="circle2" >
@@ -24,14 +24,33 @@
             <input class="input-circle input-circle5" type="radio" id="circle5" >
             <input class="input-circle input-circle6" type="radio" id="circle6" >
                 
-            <label for="circle1" class="pajaro pajaro1"><span></span></label>
-            <label for="circle2" class="pajaro pajaro2"><span></span></label>
-            <label for="circle3" class="pajaro pajaro3"><span></span></label>
-            <label for="circle4" class="pajaro pajaro4"><span></span></label>
-            <label for="circle5" class="pajaro pajaro5"><span></span></label>
-            <label for="circle6" class="pajaro pajaro6"><span></span></label>
+            <label for="circle1" class="pajaro pajaro1" id="pj1"><span></span></label>
+            <label for="circle2" class="pajaro pajaro2" id="pj2"><span></span></label>
+            <label for="circle3" class="pajaro pajaro3" id="pj3"><span></span></label>
+            <label for="circle4" class="pajaro pajaro4" id="pj4"><span></span></label>
+            <label for="circle5" class="pajaro pajaro5" id="pj5"><span></span></label>
+            <label for="circle6" class="pajaro pajaro6" id="pj6"><span></span></label>
             <div class="sum">SCORE:</div>
-        </div>                
+        </div>
+        <script>
+            function saveAndQuit(){
+                var score=0;
+                for (let i = 1; i < 7; i++) {
+                   var elementp = document.querySelector("#pj" + String(i));
+                   var element = elementp.querySelector("span");
+                   if(element.getBoundingClientRect().width){
+                      score++;   
+                   }
+                }
+                var payload = {
+                    'score':score,
+                    'email':1
+                }; 
+                $.post("/kill_birds/",payload);
+                location.href = "/dashboard/";
+            }
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </body>
 </html>
 

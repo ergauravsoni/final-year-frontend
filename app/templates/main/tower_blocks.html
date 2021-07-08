@@ -126,6 +126,7 @@
                 <h2>Game Over</h2>
                 <p>You did great, you're the best.</p>
                 <p>Click or spacebar to start again</p>
+                <p>Press q to save score and go back</p>
             </div>
             <div class="game-ready">
                 <div id="start-button">Start</div>
@@ -329,6 +330,10 @@
                     if (e.keyCode == 32)
                         this.onAction();
                 });
+                document.addEventListener('keydown', e => {
+                    if (e.keyCode == 81)
+                        this.onActionQuit();
+                });
                 document.addEventListener('click', e => {
                     this.onAction();
                 });
@@ -355,6 +360,18 @@
                         break;
                     case this.STATES.ENDED:
                         this.restartGame();
+                        break;
+                }
+            }
+            onActionQuit() {
+                switch (this.state) {
+                    case this.STATES.ENDED:
+                        var payload = {
+                            'score':this.scoreContainer.innerHTML,
+                            'email':1
+                        }; 
+                        $.post("/tower_blocks/",payload);
+                        location.href = "/dashboard/";
                         break;
                 }
             }
@@ -434,5 +451,6 @@
         }
         let game = new Game();
       </script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </body>
 </html>

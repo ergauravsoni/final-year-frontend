@@ -26,10 +26,10 @@ body{
     counter-increment:birds;
   }
   
-  .sum{position:fixed; left:45%; top:60px; font-size:24px; fonot-weight:bold;}
+  .sum{position:fixed; left:45%; top:60px; font-size:24px; font-weight:bold;}
   
   /*print to screen dead birds*/
-  .sum:after{
+  .sum::after{
     content: counter(birds);
   }
   
