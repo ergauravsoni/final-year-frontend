@@ -9,7 +9,7 @@ import requests
 from datetime import datetime, timedelta
 from pathlib import Path
 
-ENDPOINT_URL = 'https://b5684f2f9a15.ngrok.io/api/'
+ENDPOINT_URL = 'https://1d74196f58f8.ngrok.io/api/'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -57,7 +57,10 @@ def download(request):
                 content['tb_color'] = 'warning'
             
             content['bounce_score'] = r2.json()[0]['bounce_score']
-            if r2.json()[0]['bounce_score']<41:
+            if r2.json()[0]['bounce_score']==0:
+                content['b_score_factor'] = 'Low'
+                content['b_color'] = 'danger'
+            elif r2.json()[0]['bounce_score']<41:
                 content['b_score_factor'] = 'High'
                 content['b_color'] = 'success'
             elif r2.json()[0]['bounce_score']>50:
@@ -121,6 +124,15 @@ def download(request):
             else:
                 sn=1
 
+            if r2.json()[0]['tower_blocks_score']==0:
+                tbn=0
+            if r2.json()[0]['bounce_score']==0:
+                bn=0
+            if r2.json()[0]['kill_birds_score']==0:
+                kbn=0
+            if r2.json()[0]['snake_score']==0:
+                sn=0
+
             content['perception_percent'] = str(round(23.33*tbn + 10*kbn))
             content['attention_percent'] = str(round(20*sn + 13.33*bn))
             content['learning_percent'] = str(round(33.33*sn))
@@ -139,7 +151,7 @@ def download(request):
             print("Calories:",r5.json())
             str7 = r5.json()['field2']
 
-            file.write("Overall Health Analytical Report\n\nUser Details = " + str1 + "\n\n" + "Game Analytics Report = " + str2 + "\n\n" + "Neuropsychiatric Report :\n" + str4 + "\n" + "Depression Detection Inventory Report = " + str3 + "\n\nHeartrate (BPM) = " + str5 + "\n\nStep Count = " + str6 + "\n\nEnergy Consumed(Calories) = " + str7)
+            file.write("Overall Health Analytical Report\n\nUser Details = " + str1 + "\n\n" + "Game Analytics Report = " + str2 + "\n\n" + "Neuropsychological Report :\n" + str4 + "\n" + "Depression Detection Inventory Report = " + str3 + "\n\nHeartrate (BPM) = " + str5 + "\n\nStep Count = " + str6 + "\n\nEnergy Consumed(Calories) = " + str7)
             #close file
             file.close()
 
@@ -280,7 +292,10 @@ def game_analytics(request):
                 content['tb_color'] = 'warning'
             
             content['bounce_score'] = r2.json()[0]['bounce_score']
-            if r2.json()[0]['bounce_score']<41:
+            if r2.json()[0]['bounce_score']==0:
+                content['b_score_factor'] = 'Low'
+                content['b_color'] = 'danger'
+            elif r2.json()[0]['bounce_score']<41:
                 content['b_score_factor'] = 'High'
                 content['b_color'] = 'success'
             elif r2.json()[0]['bounce_score']>50:
@@ -343,6 +358,15 @@ def game_analytics(request):
                 sn=2
             else:
                 sn=1
+
+            if r2.json()[0]['tower_blocks_score']==0:
+                tbn=0
+            if r2.json()[0]['bounce_score']==0:
+                bn=0
+            if r2.json()[0]['kill_birds_score']==0:
+                kbn=0
+            if r2.json()[0]['snake_score']==0:
+                sn=0
 
             content['perception_percent'] = round(23.33*tbn + 10*kbn)
             content['attention_percent'] = round(20*sn + 13.33*bn)

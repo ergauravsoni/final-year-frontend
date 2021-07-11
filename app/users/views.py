@@ -4,7 +4,7 @@ from django.urls import reverse
 
 import requests
 
-ENDPOINT_URL = 'https://b5684f2f9a15.ngrok.io/api/users/'
+ENDPOINT_URL = 'https://1d74196f58f8.ngrok.io/api/users/'
 
 def profile(request):
     message=""
